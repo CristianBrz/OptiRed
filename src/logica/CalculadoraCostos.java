@@ -29,24 +29,33 @@ public class CalculadoraCostos {
 	// Implementacion de la formula de Heversine (Tiene en cuenta la curvatura
 	// terrestre)
 	private double calcularDistancia(Localidad origen, Localidad destino) {
-		final double RADIO_TERRESTRE = 6371; // radio de la Tierra en km
+		final double RADIO_TERRESTRE_KM = 6371.2; // radio de la Tierra en km
 
-		double lat1 = Math.toRadians(origen.getLatitud());
-		double lon1 = Math.toRadians(origen.getLongitud());
-		double lat2 = Math.toRadians(destino.getLatitud());
-		double lon2 = Math.toRadians(destino.getLongitud());
+		Coordenadas cordOrigen = origen.getCoordenadas();
+		double latOrigen = cordOrigen.getLatitudRad();
+		double longOrigen = cordOrigen.getLongitudRad();
 
-		double deltaLat = lat2 - lat1;
-		double deltaLong = lon2 - lon1;
+		Coordenadas cordDestino = destino.getCoordenadas();
+		double latDestino = cordDestino.getLatitudRad();
+		double longDestino = cordDestino.getLongitudRad();
 
-		double terminoHaversine = Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2)
-				+ Math.cos(lat1) * Math.cos(lat2) * Math.sin(deltaLong / 2) * Math.sin(deltaLong / 2);
+		double deltaLat = latDestino - latOrigen;
+		double deltaLong = longDestino - longOrigen;
 
-		double anguloCentral = 2 * Math.atan2(Math.sqrt(terminoHaversine), Math.sqrt(1 - terminoHaversine));
+		double terminoHaversiano = hav(deltaLat) + Math.cos(latOrigen) * Math.cos(latDestino) * hav(deltaLong);
 
-		double distancia =  RADIO_TERRESTRE * anguloCentral;
-		
+		double anguloCentral = 2 * Math.atan2(Math.sqrt(terminoHaversiano), Math.sqrt(1 - terminoHaversiano));
+
+		double distancia = RADIO_TERRESTRE_KM * anguloCentral;
+
 		return distancia;
+	}
+
+	private double hav(double x) {
+		double seno = Math.sin(x / 2);
+		double senoCuadrado = seno * seno;
+
+		return senoCuadrado;
 	}
 
 }
