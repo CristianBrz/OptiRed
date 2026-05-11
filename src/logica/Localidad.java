@@ -3,12 +3,12 @@ package logica;
 public class Localidad {
 	private String nombre;
 	private String provincia;
-  private Coordenadas coordenadas;
-  
+	private Coordenadas coordenadas;
+
 	public Localidad(String nombre, String provincia, double latitud, double longitud) {
 		this.nombre = nombre;
 		this.provincia = provincia;
-    this.coordenadas = new Coordenadas(latitud, longitud);
+		this.coordenadas = new Coordenadas(latitud, longitud);
 	}
 
 	public String getNombre() {
@@ -19,8 +19,7 @@ public class Localidad {
 		return provincia;
 	}
 
-
-  public Coordenadas getCoordenadas() {
-      return coordenadas;
-  }
+	public Coordenadas getCoordenadas() {
+		return coordenadas;
+	}
 }
