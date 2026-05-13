@@ -7,6 +7,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JTextArea;
+import javax.swing.UIManager;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import javax.swing.JLabel;
 
 public class PanelMenu extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -45,7 +51,6 @@ public class PanelMenu extends JFrame {
 		//Boton de mostrar los miembros
 		JButton btnMembers = new JButton("Miembros");
 		btnMembers.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Creado por Brizuela Cristian, Regunega Roberto y Zalazar Fernandez Gabriela");
 			}
@@ -60,7 +65,7 @@ public class PanelMenu extends JFrame {
 		btnRules.setFont(new java.awt.Font("Tahoma", java.awt.Font.BOLD, 17));
 		btnRules.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "");
+				JOptionPane.showMessageDialog(null, "Registre las localidades para generar un cálculo y grafo con la planificación óptima de conexiones.");
 			}
 		});
 		btnRules.setBounds(340, 334, 312, 65);
@@ -69,7 +74,6 @@ public class PanelMenu extends JFrame {
 		//Boton de salir
 		JButton btnExit = new JButton("Salir");
 		btnExit.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
@@ -78,5 +82,14 @@ public class PanelMenu extends JFrame {
 		btnExit.setFont(new java.awt.Font("Tahoma", java.awt.Font.BOLD, 17));
 		btnExit.setBounds(340, 410, 312, 59);
 		contentPane.add(btnExit);
+		
+		JLabel lblNewLabel = new JLabel("<html><center>" +
+			    "Conectando Las Localidades<br>" +
+			    "A La Velocidad De La Luz" +
+			    "</center></html>");
+		lblNewLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(10, 51, 988, 107);
+		contentPane.add(lblNewLabel);
 	}
 }

@@ -1,47 +1,45 @@
 package gui;
 
 import java.awt.BorderLayout;
-
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
-import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.DefaultMapController;
 
-public class PanelMapa {
-	public static void main(String[] args) {
+public class PanelMapa extends JFrame {
+	private static final long serialVersionUID = 1L;
 
-		JFrame ventana = new JFrame("Mi Mapa con JMapViewer 2.10");
-		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ventana.setSize(800, 600);
+	private JPanel contentPane;
+	private JMapViewer mapa;
 
-		// con marker se puede marcar una parte del mapa, util para cuando marque el
-		// usuario
-		MapMarkerDot marcador = new MapMarkerDot(40.4167, -3.7033);
-		JPanel miPanel = new JPanel();
-		miPanel.setLayout(new BorderLayout());
+	public PanelMapa() {
 
-		// aca se crea el mapa, y se configura el controlador para desplazarse por el
-		// mapa
-		JMapViewer mapa = new JMapViewer();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1024, 719);
+
+		contentPane = new JPanel();
+		contentPane.setLayout(new BorderLayout());
+
+		setContentPane(contentPane);
+
+		inicializarMapa();
+
+		setResizable(false);
+		setTitle("Mapa");
+		setLocationRelativeTo(null);
+	}
+
+	private void inicializarMapa() {
+		mapa = new JMapViewer();
 		DefaultMapController controlador = new DefaultMapController(mapa);
-		controlador.isDoubleClickZoomEnabled();
 		controlador.setMovementMouseButton(MouseEvent.BUTTON1);
-
-		mapa.setDisplayPosition(new Coordinate(40.4167, -3.7033), 10);
-		miPanel.add(mapa, BorderLayout.CENTER);
+		Coordinate madrid = new Coordinate(40.4167, -3.7033);
+		mapa.setDisplayPosition(madrid, 10);
+		MapMarkerDot marcador = new MapMarkerDot(madrid);
 		mapa.addMapMarker(marcador);
-		ventana.add(miPanel);
-		ventana.setVisible(true);
+		contentPane.add(mapa, BorderLayout.CENTER);
 	}
 }
