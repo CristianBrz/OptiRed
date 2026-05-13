@@ -15,19 +15,6 @@ class Coordenadas{
 	}
 }
 
-class Vertice{
-	private String localidad;
-	
-	public Vertice(String localidad, Arista arista) {
-		super();
-		this.localidad = localidad;
-	}
-	public Vertice(String localidad) {
-		super();
-		this.localidad = localidad;
-	}
-}
-
 class Grafo{
 	
 	private HashMap<Coordenadas,Vertice> vertices=new HashMap<>();
@@ -35,20 +22,11 @@ class Grafo{
 	
 	public void insertarVertice(String localidad, Coordenadas coordenada){
 		Vertice vertice=new Vertice(localidad);
-		
-		vertices.put(coordenada, new Vertice(localidad));
-	}
-	public void insertarVertice(String localidad, Coordenadas coordenada, Arista arista){
 		vertices.put(coordenada, new Vertice(localidad));
 	}
 	
-	public void insertarArista(Arista arista) {
+	public void conectarVertices(Arista arista) {
 		minHeap.add(arista);
 	}
-	
-	
-	
-	
-	
 } 
 
