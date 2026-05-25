@@ -61,32 +61,34 @@ class Grafo{
 	
 	public void Eliminar_arista() {
 		minHeap.poll();
-		
+	}
+	
+	public Union_find crear(Grafo grafo) {
+		Union_find datos=new Union_find();
+		for (Vertice vertice : grafo.vertices.values()) {
+		    datos.make_set(vertice);
+		}
+		return datos;
 	}
 	
 public Grafo devolverKruscal(Grafo grafo) {
 		Grafo kruscal=new Grafo();
-		Union_find ver_bucle=new Union_find();
+		Union_find u_f=crear(grafo);
 		
 		while(!minHeap.isEmpty()) {
 		Arista arista=devolverAristaMinima();
-		Vertice vertice1=arista.getOrigen();
-		Vertice vertice2=arista.getDestino();
+		Vertice root1=u_f.find(arista.getDestino());
+		Vertice root2=u_f.find(arista.getOrigen());;
 		
-		if(ver_bucle.find(vertice1)!=null && ver_bucle.find(vertice2)!=null) {
-			if(!ver_bucle.find(vertice1).equals(ver_bucle.find(vertice2))) {
-			ver_bucle.union(vertice1, vertice2);
-			}
-			continue;
-		}
-		else {
-		ver_bucle.make_set(vertice1);
-		ver_bucle.make_set(vertice2);
-		kruscal.insertarArista(arista);
+		
+		if(!root1.equals(root2)) {
+			kruscal.insertarArista(arista);
+			u_f.union(root1, root2);
 		}
 		}
+		
 		return kruscal;
-	}
+		}
 
 class Union_find {
 	HashMap<Vertice,Vertice> parent=new HashMap<>();
